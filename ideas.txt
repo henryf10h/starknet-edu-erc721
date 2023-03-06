@@ -1,3 +1,14 @@
+1
 protostar deploy 0x1db25aa979f80813027fc2ecd91a8c5deba9563e34e9c6780f48693ea606d73  --network testnet --account-address 0x052E6AD8187767eF41F2F3bc225D33d31B37DD9BBEE7B628F4b6b16b90D293EC --max-fee auto --private-key-path ./.env --inputs 8532469069598125939 7760755 2343576618933993302415733561709464540131434012961226624765960147118779962348
 
+2
 let (read_sex, read_legs, read_wings) = IExerciceSolution.get_animal_characteristics(contract_address = submited_exercise_address, token_id=token_id)
+
+protostar deploy 0x50a27152c6c5beb4d826c154c07422da259536750986bf8195a8184e6bf6e4a  --network testnet --account-address 0x052E6AD8187767eF41F2F3bc225D33d31B37DD9BBEE7B628F4b6b16b90D293EC --max-fee auto --private-key-path ./.env --inputs 8532469069598125939 7760755 2343576618933993302415733561709464540131434012961226624765960147118779962348
+
+protostar declare json  --network testnet --account-address 0x052E6AD8187767eF41F2F3bc225D33d31B37DD9BBEE7B628F4b6b16b90D293EC --max-fee auto --private-key-path ./.env 
+
+3
+protostar deploy 0x6f65e0457e6951bde3e44b85c9e0d97c26fc89367fb3236288db20edfc42bd0  --network testnet --account-address 0x052E6AD8187767eF41F2F3bc225D33d31B37DD9BBEE7B628F4b6b16b90D293EC --max-fee auto --private-key-path ./.env --inputs 8532469069598125939 7760755 2343576618933993302415733561709464540131434012961226624765960147118779962348
+
+protostar declare ./build/ERC721_ex03.json --network testnet --account-address 0x052E6AD8187767eF41F2F3bc225D33d31B37DD9BBEE7B628F4b6b16b90D293EC --max-fee auto --private-key-path ./.env

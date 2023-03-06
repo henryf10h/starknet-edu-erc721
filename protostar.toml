@@ -7,4 +7,7 @@ cairo-path = ["lib/cairo_contracts/src", "lib/cairopen_contracts/src"]
 ERC721_original = [
     "src/ERC721MintableBurnable.cairo",
 ]
+ERC721_ex03 = [
+    "src/ERC721_ex03.cairo",
+]
 

@@ -110,6 +110,23 @@
     {
         "inputs": [
             {
+                "name": "address",
+                "type": "felt"
+            }
+        ],
+        "name": "get_is_breeder",
+        "outputs": [
+            {
+                "name": "is_true",
+                "type": "felt"
+            }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+    },
+    {
+        "inputs": [
+            {
                 "name": "token_id",
                 "type": "Uint256"
             }
@@ -419,6 +436,28 @@
                 "type": "Uint256"
             }
         ],
+        "type": "function"
+    },
+    {
+        "inputs": [
+            {
+                "name": "breeder_address",
+                "type": "felt"
+            }
+        ],
+        "name": "add_breeder",
+        "outputs": [],
+        "type": "function"
+    },
+    {
+        "inputs": [
+            {
+                "name": "breeder_address",
+                "type": "felt"
+            }
+        ],
+        "name": "remove_breeder",
+        "outputs": [],
         "type": "function"
     }
 ]
