@@ -170,13 +170,6 @@ func safeTransferFrom{pedersen_ptr: HashBuiltin*, syscall_ptr: felt*, range_chec
 }
 
 @external
-func burn{pedersen_ptr: HashBuiltin*, syscall_ptr: felt*, range_check_ptr}(tokenId: Uint256) {
-    ERC721.assert_only_token_owner(tokenId);
-    ERC721._burn(tokenId);
-    return ();
-}
-
-@external
 func setTokenURI{pedersen_ptr: HashBuiltin*, syscall_ptr: felt*, range_check_ptr}(
     tokenId: Uint256, tokenURI: felt
 ) {
@@ -220,6 +213,13 @@ func declare_animal{syscall_ptr : felt*, pedersen_ptr : HashBuiltin*, range_chec
     // Update and return new token id
     last_token_id.write(new_token_id);
     return (token_id=new_token_id);
+}
+
+@external
+func declare_dead_animal{...}(token_id : Uint256) {
+    ERC721.assert_only_token_owner(token_id);
+    ERC721._burn(token_id);
+    return ();
 }
 
 @external

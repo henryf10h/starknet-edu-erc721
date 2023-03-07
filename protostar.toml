@@ -11,3 +11,6 @@ ERC721_ex03 = [
     "src/ERC721_ex03.cairo",
 ]
 
+ERC721_ex04 = [
+    "src/ERC721_ex04.cairo"
+]

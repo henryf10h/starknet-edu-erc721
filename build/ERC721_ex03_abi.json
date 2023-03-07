@@ -423,10 +423,6 @@
             {
                 "name": "wings",
                 "type": "felt"
-            },
-            {
-                "name": "evaluator_address",
-                "type": "felt"
             }
         ],
         "name": "declare_animal",
