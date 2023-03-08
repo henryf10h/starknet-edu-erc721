@@ -16,3 +16,5 @@ protostar declare ./build/ERC721_ex03.json --network testnet --account-address 0
 4
 
 protostar declare ./build/ERC721_ex04.json --network testnet --account-address 0x052E6AD8187767eF41F2F3bc225D33d31B37DD9BBEE7B628F4b6b16b90D293EC --max-fee auto --private-key-path ./.env
+
+protostar deploy 0x7cecbf366e737ec3db46cd0abe6cc5289bc3c67318de3d4b07ed5759b1f50da  --network testnet --account-address 0x052E6AD8187767eF41F2F3bc225D33d31B37DD9BBEE7B628F4b6b16b90D293EC --max-fee auto --private-key-path ./.env --inputs 8532469069598125939 7760755 2343576618933993302415733561709464540131434012961226624765960147118779962348

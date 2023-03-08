@@ -5,11 +5,12 @@
 
 from starkware.cairo.common.cairo_builtins import HashBuiltin
 from starkware.starknet.common.syscalls import get_caller_address
-from starkware.cairo.common.math import assert_not_zero
 from starkware.cairo.common.uint256 import Uint256, uint256_add, uint256_check
 from openzeppelin.access.ownable.library import Ownable
 from openzeppelin.introspection.erc165.library import ERC165
 from openzeppelin.token.erc721.library import ERC721
+from openzeppelin.token.erc721.enumerable.library import ERC721Enumerable
+from starkware.cairo.common.math import assert_not_zero, assert_nn, split_felt
 
 //
 // Constructor
@@ -50,6 +51,22 @@ func last_token_id() -> (token_id : Uint256) {
 //
 // Getters
 //
+
+@view
+func token_of_owner_by_index{syscall_ptr : felt*, pedersen_ptr : HashBuiltin*, range_check_ptr}(
+    account : felt, index : felt
+) -> (token_id : Uint256) {
+    alloc_locals;
+    with_attr error_message("ERC721: the zero address is not supported as a token holder") {
+        assert_not_zero(account);
+    }
+    with_attr error_message("ERC721: index must be a positive integer") {
+        assert_nn(index);
+    }
+    let (index_uint256) = felt_to_uint256(index);
+    let (token_id) = ERC721Enumerable.token_of_owner_by_index(owner=account, index=index_uint256);
+    return (token_id = token_id);
+}
 
 @view
 func get_is_breeder{syscall_ptr : felt*, pedersen_ptr : HashBuiltin*, range_check_ptr}(
@@ -157,7 +174,7 @@ func setApprovalForAll{syscall_ptr: felt*, pedersen_ptr: HashBuiltin*, range_che
 func transferFrom{pedersen_ptr: HashBuiltin*, syscall_ptr: felt*, range_check_ptr}(
     from_: felt, to: felt, tokenId: Uint256
 ) {
-    ERC721.transfer_from(from_, to, tokenId);
+    ERC721Enumerable.transfer_from(from_, to, tokenId);
     return ();
 }
 
@@ -165,7 +182,7 @@ func transferFrom{pedersen_ptr: HashBuiltin*, syscall_ptr: felt*, range_check_pt
 func safeTransferFrom{pedersen_ptr: HashBuiltin*, syscall_ptr: felt*, range_check_ptr}(
     from_: felt, to: felt, tokenId: Uint256, data_len: felt, data: felt*
 ) {
-    ERC721.safe_transfer_from(from_, to, tokenId, data_len, data);
+    ERC721Enumerable.safe_transfer_from(from_, to, tokenId, data_len, data);
     return ();
 }
 
@@ -194,20 +211,18 @@ func renounceOwnership{syscall_ptr: felt*, pedersen_ptr: HashBuiltin*, range_che
 
 @external
 func declare_animal{syscall_ptr : felt*, pedersen_ptr : HashBuiltin*, range_check_ptr}(
-    sex : felt, legs : felt, wings : felt
+    sex : felt, legs : felt, wings : felt, evaluator_address : felt
 ) -> (token_id : Uint256) {
     alloc_locals;
-    assert_only_breeder();
+    Ownable.assert_only_owner();
  
     // Increment token id by 1
     let current_token_id : Uint256 = last_token_id.read();
     let one_as_uint256 = Uint256(1, 0);
     let (local new_token_id, _) = uint256_add(current_token_id, one_as_uint256);
-
-     let (sender_address) = get_caller_address();
  
     // Mint NFT and store characteristics on-chain
-    ERC721._mint(sender_address, new_token_id);
+    ERC721Enumerable._mint(evaluator_address, new_token_id);
     animals.write(new_token_id, Animal(sex=sex, legs=legs, wings=wings));
  
     // Update and return new token id
@@ -216,9 +231,9 @@ func declare_animal{syscall_ptr : felt*, pedersen_ptr : HashBuiltin*, range_chec
 }
 
 @external
-func declare_dead_animal{...}(token_id : Uint256) {
+func declare_dead_animal{syscall_ptr : felt*, pedersen_ptr : HashBuiltin*, range_check_ptr}(token_id : Uint256) {
     ERC721.assert_only_token_owner(token_id);
-    ERC721._burn(token_id);
+    ERC721Enumerable._burn(token_id);
     return ();
 }
 
@@ -261,4 +276,12 @@ func assert_only_breeder{pedersen_ptr : HashBuiltin*, syscall_ptr : felt*, range
         assert is_true = 1;
     }
     return ();
+}
+
+func felt_to_uint256{pedersen_ptr : HashBuiltin*, syscall_ptr : felt*, range_check_ptr}(
+    felt_value : felt
+) -> (uint256_value : Uint256) {
+    let (high, low) = split_felt(felt_value);
+    let uint256_value : Uint256 = Uint256(low, high);
+    return (uint256_value = uint256_value);
 }
