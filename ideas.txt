@@ -29,3 +29,58 @@ protostar deploy 0x133ca38e23b91056677f73c1f322cd168247143068c62fd691e5b26613e94
 done
 
 7
+
+errors
+
+protostar build
+Unexpected Protostar error. Report it here:                                                                                                                     
+https://github.com/software-mansion/protostar/issues
+
+Traceback (most recent call last):
+  File "starkware/cairo/lang/compiler/import_loader.py", line 73, in collect
+  File "starkware/cairo/lang/compiler/preprocessor/default_pass_manager.py", line 131, in read_file_fixed
+  File "starkware/cairo/lang/compiler/module_reader.py", line 56, in read
+  File "starkware/cairo/lang/compiler/module_reader.py", line 49, in module_to_file_path
+starkware.cairo.lang.compiler.module_reader.ModuleNotFoundException: Could not find module 'libs.ShortString'. Searched in the following paths:
+/mnt/c/Users/Henry Alberto/desktop/starknet-edu/starknet-erc721/lib/cairo_contracts/src/libs/ShortString.cairo
+/mnt/c/Users/Henry Alberto/desktop/starknet-edu/starknet-erc721/lib/cairopen_contracts/src/libs/ShortString.cairo
+/mnt/c/Users/Henry Alberto/desktop/starknet-edu/starknet-erc721/libs/ShortString.cairo
+/mnt/c/Users/Henry Alberto/desktop/starknet-edu/starknet-erc721/libs/ShortString.cairo
+/home/henryf10h/.protostar/dist/protostar/libs/ShortString.cairo
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "binary_entrypoint.py", line 79, in <module>
+  File "binary_entrypoint.py", line 23, in init
+  File "protostar/start.py", line 21, in main
+  File "protostar/start.py", line 47, in run_protostar
+  File "protostar/start.py", line 42, in run_protostar
+  File "asyncio/runners.py", line 44, in run
+  File "asyncio/base_events.py", line 647, in run_until_complete
+  File "protostar/protostar_cli.py", line 80, in run
+  File "protostar/protostar_cli.py", line 117, in _run_command_from_args
+  File "protostar/argument_parser/cli_app.py", line 25, in run
+  File "protostar/commands/build_command.py", line 77, in run
+  File "protostar/commands/build_command.py", line 91, in build
+  File "protostar/compiler/project_compiler.py", line 56, in compile_project
+  File "protostar/compiler/project_compiler.py", line 89, in compile_contract_from_contract_name
+  File "protostar/compiler/project_compiler.py", line 100, in compile_contract_from_contract_source_paths
+  File "protostar/starknet/compiler/starknet_compilation.py", line 108, in compile_contract
+  File "protostar/starknet/compiler/starknet_compilation.py", line 64, in preprocess_contract
+  File "starkware/cairo/lang/compiler/preprocessor/pass_manager.py", line 70, in run
+  File "starkware/cairo/lang/compiler/preprocessor/default_pass_manager.py", line 163, in run
+  File "starkware/cairo/lang/compiler/preprocessor/default_pass_manager.py", line 133, in collect_module
+  File "starkware/cairo/lang/compiler/import_loader.py", line 30, in collect_imports
+  File "starkware/cairo/lang/compiler/import_loader.py", line 94, in collect
+  File "starkware/cairo/lang/compiler/import_loader.py", line 94, in collect
+  File "starkware/cairo/lang/compiler/import_loader.py", line 75, in collect
+starkware.cairo.lang.compiler.import_loader.ImportLoaderError: /mnt/c/Users/Henry Alberto/desktop/starknet-edu/starknet-erc721/contracts/ERC721_Metadata.cairo:11:6: Could not find module 'libs.ShortString'. Searched in the following paths:
+/mnt/c/Users/Henry Alberto/desktop/starknet-edu/starknet-erc721/lib/cairo_contracts/src/libs/ShortString.cairo
+/mnt/c/Users/Henry Alberto/desktop/starknet-edu/starknet-erc721/lib/cairopen_contracts/src/libs/ShortString.cairo
+/mnt/c/Users/Henry Alberto/desktop/starknet-edu/starknet-erc721/libs/ShortString.cairo
+/mnt/c/Users/Henry Alberto/desktop/starknet-edu/starknet-erc721/libs/ShortString.cairo
+/home/henryf10h/.protostar/dist/protostar/libs/ShortString.cairo
+from libs.ShortString import uint256_to_ss
+     ^**************^
+[2508] Failed to execute script 'binary_entrypoint' due to unhandled exception!

@@ -1,7 +1,7 @@
 [project]
 protostar-version = "0.9.1"
 lib-path = "lib"
-cairo-path = ["lib/cairo_contracts/src", "lib/cairopen_contracts/src"]
+cairo-path = ["lib/cairo_contracts/src", "lib/cairopen_contracts/src", "lib/libs"]
 
 [contracts]
 ERC721_original = [
@@ -23,14 +23,7 @@ ERC721_ex07 = [
     "src/ERC721_ex07.cairo"
 ]
 
-ERC721_Metadata = [
-    "src/ERC721_Metadata.cairo"
-]
 
-Array = [
-    "src/Array.cairo"
-]
 
-ShortString = [
-    "src/ShortString.cairo"
-]
+
+
