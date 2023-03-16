@@ -18,3 +18,19 @@ ERC721_ex04 = [
 ERC721_ex05 = [
     "src/ERC721_ex05.cairo"
 ]
+
+ERC721_ex07 = [
+    "src/ERC721_ex07.cairo"
+]
+
+ERC721_Metadata = [
+    "src/ERC721_Metadata.cairo"
+]
+
+Array = [
+    "src/Array.cairo"
+]
+
+ShortString = [
+    "src/ShortString.cairo"
+]
